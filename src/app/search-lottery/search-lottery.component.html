@@ -1,4 +1,4 @@
-<form #heroForm="ngForm" (ngSubmit)="onSubmit()">
+<form #heroForm="ngForm" (ngSubmit)="onSubmit(dateInput, selectedProvince)">
   <div class="form-group">
     <label for="date">Ngày</label>
     <input
@@ -7,37 +7,28 @@
       class="form-control"
       placeholder="dd-MM-yyyy"
       id="date"
-      value="01-12-2021"
-      [(ngModel)]="dateInput"
+      value="28-11-2021"
+      #dateInput
       name="date"
     />
-    TODO: Delete this: {{ dateInput }}
+    TODO: ❗️ {{ dateInput.value }}
   </div>
+  <!-- <div class="form-group">
+    <label for="province">Tỉnh</label>
+    <input type="text" class="form-control" required #provinceInput value="1" />
+    TODO: ❗️ {{ provinceInput.value }}
+    <br />
+  </div> -->
   <div class="form-group">
     <label for="province">Tỉnh</label>
-    <select
-      id="province"
-      required
-      class="form-control"
-      [(ngModel)]="selectedProvince"
-      name="province"
-    >
+    <select id="province" class="form-control" ngModel name="selectedProvince">
       <option *ngFor="let province of provinces" [ngValue]="province">
-        {{ province.name }} - {{ province.id }}
+        {{ province.name }}
       </option>
     </select>
-    <!-- <input
-      type="text"
-      required
-      class="form-control"
-      id="province"
-      name="province"
-      [(ngModel)]="provinceCode"
-    /> -->
-    TODO: Delete this: Choosing: {{ selectedProvince.id }}
-    <br />
+    TODO: ❗️ {{ selectedProvince | json }}
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="searchValue">Số vé</label>
     <input
       type="text"
@@ -47,7 +38,7 @@
       name="searchValue"
       value="666666"
     />
-  </div>
+  </div> -->
   <button class="btn btn-primary" type="submit">Dò vé</button>
 </form>
 <!-- {{ results | json }} -->

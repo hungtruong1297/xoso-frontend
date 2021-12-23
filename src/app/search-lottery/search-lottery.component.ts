@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-lottery.component.css']
 })
 export class SearchLotteryComponent implements OnInit {
-  http;
+  // http;
 
   _urlResult = "http://localhost:8080/api/results/";
   _urlProvince = "http://localhost:8080/api/provinces";
@@ -18,21 +18,24 @@ export class SearchLotteryComponent implements OnInit {
   provinces: any;
   results: any;
 
-  dateInput = "";
-  provinceInput = "Dak Lak";
-  provinceCode = "17";
+  // dateInput = "";
+  // provinceInput = "Dak Lak";
+  // provinceCode = "17";
 
   selectedDate: any;
   selectedProvince = new Province(-1, "Empty");
 
-  constructor(http: HttpClient) {
-    this.http = http;
+  constructor(private http: HttpClient) {
     this.getProvinces();
   }
 
-  onSubmit() {
+  onSubmit(dateInput: HTMLInputElement, selectedProvince: Province) {
+    // Reset result
     this.results = undefined;
-    this.updatedURL = this._urlResult + this.dateInput + "/" + this.selectedProvince.id;
+
+    let date = dateInput.value;
+    let province = selectedProvince.id;
+    this.updatedURL = this._urlResult + date + "/" + province;
     this.http.get(this.updatedURL).subscribe(response => this.results = response);
   }
 
