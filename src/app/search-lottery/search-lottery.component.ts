@@ -2,6 +2,7 @@ import { Province } from './../province';
 import { Result } from './../result';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-search-lottery',
@@ -11,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class SearchLotteryComponent implements OnInit {
   // http;
 
-  _urlResult = "http://localhost:8080/api/results/";
+  _urlResult = "http://localhost:8080/api/results";
   _urlProvince = "http://localhost:8080/api/provinces";
   updatedURL: string | undefined;
 
@@ -29,13 +30,12 @@ export class SearchLotteryComponent implements OnInit {
     this.getProvinces();
   }
 
-  onSubmit(dateInput: HTMLInputElement, selectedProvince: Province) {
-    // Reset result
-    this.results = undefined;
+  submit(f: NgForm) {
+    console.log(f);
+    let date = f.value.date;
+    let provinceId = f.value.id;
 
-    let date = dateInput.value;
-    let province = selectedProvince.id;
-    this.updatedURL = this._urlResult + date + "/" + province;
+    this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
     this.http.get(this.updatedURL).subscribe(response => this.results = response);
   }
 
@@ -62,6 +62,19 @@ export class SearchLotteryComponent implements OnInit {
         "name": "Bình Dương"
       }]
   }
+
+  update(result: Result, newResult: HTMLInputElement) {
+    result.result = newResult.value;
+    // console.log(newResult);
+    this.http.put(this._urlResult + "/" + result.id, result).subscribe(response => { console.log(response) })
+    newResult.value = "";
+  }
+
+  create(newResult: HTMLInputElement) {
+    // this.http.post(this._urlResult, result).subscribe(response => {console.log(response)})
+  }
+
+
 
 
   ngOnInit(): void {
