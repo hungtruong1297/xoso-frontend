@@ -64,7 +64,6 @@
         <th>Kết quả</th>
         <th>Kết quả mới</th>
         <th>Update</th>
-        <th>Create</th>
       </tr>
     </thead>
     <tbody>
@@ -73,7 +72,7 @@
         <td>{{ result.result }}</td>
         <td>
           <input type="text" ngModel name="newResult" #newResult />
-          {{ result | json }}
+          <!-- {{ result | json }} -->
         </td>
         <td>
           <button
@@ -83,11 +82,7 @@
             Update
           </button>
         </td>
-        <td>
-          <button class="btn btn-primary btn-sm" (click)="create(newResult)">
-            Create
-          </button>
-        </td>
+        <td></td>
       </tr>
     </tbody>
   </table>

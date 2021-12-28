@@ -1,0 +1,118 @@
+<form #f="ngForm" (ngSubmit)="submit(f)">
+  <div>
+    <div class="form-group">
+      <label for="date">Ngày</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        placeholder="dd-MM-yyyy"
+        id="date"
+        value="28-11-2021"
+        ngModel
+        name="date"
+        #date="ngModel"
+      />
+    </div>
+  </div>
+  <div>
+    <div class="form-group">
+      <label for="province">Tỉnh</label>
+      <select ngModel name="province" id="province" class="form-control">
+        <option *ngFor="let province of provinces" [ngValue]="province">
+          {{ province.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <!-- {{ provinceSelected | json }} -->
+  <div>
+    <div class="form-group">
+      <label for="winning">Giải</label>
+      <select ngModel name="winning" id="winning" class="form-control">
+        <option *ngFor="let winning of winnings" [ngValue]="winning">
+          {{ winning.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <div class="form-group">
+      <label for="result">Kết quả</label>
+      <input
+        type="text"
+        id="result"
+        class="form-control"
+        required
+        ngModel
+        name="result"
+      />
+    </div>
+  </div>
+  <!-- Normal 2 input fields -->
+  <!-- Kinda different syntax between ngModelGroup="province" and ngModel name="id" -->
+  <!-- <div ngModelGroup="province">
+    <div class="form-group">
+      <label for="provinceId">Tỉnh ID</label>
+      <input
+        id="provinceId"
+        type="text"
+        class="form-control"
+        required
+        ngModel
+        name="id"
+        #provinceId
+        ngModel="province"
+        [value]="provinceId"
+      />
+      {{ provinceId | json }}
+    </div>
+    <div class="form-group">
+      <label for="provinceName">Tỉnh</label>
+      <input
+        id="provinceName"
+        type="text"
+        class="form-control"
+        required
+        ngModel
+        name="name"
+        [value]="provinceId"
+      />
+    </div>
+  </div> -->
+  <button class="btn btn-primary" type="submit">Create</button>
+</form>
+{{ f.value | json }}
+<!-- Table for displaying Results -->
+<!-- <div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Giải</th>
+          <th>Kết quả</th>
+          <th>Kết quả mới</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of results">
+          <td>{{ result.winning.name }}</td>
+          <td>{{ result.result }}</td>
+          <td>
+            <input type="text" ngModel name="newResult" #newResult />
+            {{ result | json }}
+          </td>
+          <td>
+            <button
+              class="btn btn-default btn-sm"
+              (click)="update(result, newResult)"
+            >
+              Update
+            </button>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+   -->
