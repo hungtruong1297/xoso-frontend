@@ -70,8 +70,13 @@ export class SearchLotteryComponent implements OnInit {
     newResult.value = "";
   }
 
-  create(newResult: HTMLInputElement) {
-    // this.http.post(this._urlResult, result).subscribe(response => {console.log(response)})
+  deleteConfirm(result: Result) {
+    if (confirm("Do you really want to delete this?")) {
+      this.delete(result);
+    }
+  }
+  delete(result: Result) {
+    this.http.delete(this._urlResult + "/" + result.id).subscribe(response => { console.log(response) })
   }
 
 

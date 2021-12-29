@@ -6,7 +6,7 @@
         type="text"
         required
         class="form-control"
-        placeholder="dd-MM-yyyy"
+        placeholder="dd-MM-yyy"
         id="date"
         value="28-11-2021"
         ngModel
@@ -14,11 +14,23 @@
         #date="ngModel"
       />
     </div>
+    <div class="alert alert-danger" *ngIf="date.touched && date.invalid">
+      <div *ngIf="date.errors">
+        Vui lòng nhập lại ngày theo định dạng dd-MM-yyyy. Ví dụ: 28-11-2021
+      </div>
+    </div>
   </div>
   <div>
     <div class="form-group">
       <label for="province">Tỉnh</label>
-      <select ngModel name="id" id="province" class="form-control">
+      <select
+        ngModel
+        name="id"
+        id="province"
+        class="form-control"
+        required
+        #province="ngModel"
+      >
         <option *ngFor="let province of provinces" [value]="province.id">
           {{ province.name }}
         </option>
@@ -53,9 +65,11 @@
       />
     </div>
   </div> -->
-  <button class="btn btn-primary" type="submit">Dò vé</button>
+  <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
+    Dò vé
+  </button>
 </form>
-{{ f.value | json }}
+<!-- {{ f.value | json }} -->
 <div>
   <table class="table table-bordered">
     <thead>
@@ -64,6 +78,7 @@
         <th>Kết quả</th>
         <th>Kết quả mới</th>
         <th>Update</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -82,7 +97,11 @@
             Update
           </button>
         </td>
-        <td></td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteConfirm(result)">
+            Delete
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
