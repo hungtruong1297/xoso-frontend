@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchLotteryComponent } from './search-lottery/search-lottery.component';
 import { CreateLotteryComponent } from './create-lottery/create-lottery.component';
+import { ManageUserComponent } from './manage-user/manage-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchLotteryComponent,
-    CreateLotteryComponent
+    CreateLotteryComponent,
+    ManageUserComponent
   ],
   imports: [
     BrowserModule,

@@ -37,6 +37,7 @@ export class CreateLotteryComponent implements OnInit {
   }
 
   submit(f: NgForm) {
+    console.log(f);
     console.log(f.form.value);
 
     // let date = f.value.date;
