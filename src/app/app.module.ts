@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { SearchLotteryComponent } from './search-lottery/search-lottery.component';
 import { CreateLotteryComponent } from './create-lottery/create-lottery.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchLotteryComponent,
     CreateLotteryComponent,
-    ManageUserComponent
+    ManageUserComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,8 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
     FormsModule,
     RouterModule.forRoot([
       { path: 'sua-xo-so', component: SearchLotteryComponent },
-      { path: 'tao-xo-so', component: CreateLotteryComponent }
+      { path: 'tao-xo-so', component: CreateLotteryComponent },
+      { path: 'create-user', component: CreateUserComponent }
     ])
   ],
   providers: [HttpClientModule],
