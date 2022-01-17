@@ -56,6 +56,9 @@
           </option>
         </select>
       </div>
+      <div class="alert alert-danger" *ngIf="isError">
+        <p>{{ errorMessage }}</p>
+      </div>
       <div>
         <button
           class="btn btn-primary"

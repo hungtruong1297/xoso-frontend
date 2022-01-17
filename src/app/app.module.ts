@@ -1,7 +1,7 @@
 import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,12 @@ import { SearchLotteryComponent } from './search-lottery/search-lottery.componen
 import { CreateLotteryComponent } from './create-lottery/create-lottery.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { NavComponent } from './nav/nav.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
+import { TokenInterceptorService } from './token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +23,11 @@ import { CreateUserComponent } from './create-user/create-user.component';
     SearchLotteryComponent,
     CreateLotteryComponent,
     ManageUserComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    NavComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +38,17 @@ import { CreateUserComponent } from './create-user/create-user.component';
       { path: 'sua-xo-so', component: SearchLotteryComponent },
       { path: 'tao-xo-so', component: CreateLotteryComponent },
       { path: 'create-user', component: CreateUserComponent }
-    ])
+    ]),
+    ReactiveFormsModule
+
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule,
+    {
+      // Source: https://www.youtube.com/watch?v=UrfhqE7I-3o&ab_channel=Codevolution
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

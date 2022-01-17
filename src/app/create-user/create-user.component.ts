@@ -13,13 +13,26 @@ export class CreateUserComponent implements OnInit {
   _urlAddUser = "http://localhost:8080/admin/add"
 
   isLoginMode = true;
+  isError: boolean = false;
+  errorMessage: any;
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 
   onSubmit(authForm: NgForm) {
-    this.http.post(this._urlAddUser, authForm.value).subscribe(response => console.log(response))
+    this.isError = false;
+    this.http
+      .post(this._urlAddUser, authForm.value)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        errorMessage => {
+          this.isError = true;
+          this.errorMessage = errorMessage.error;
+        }
+      )
     authForm.reset();
   }
 

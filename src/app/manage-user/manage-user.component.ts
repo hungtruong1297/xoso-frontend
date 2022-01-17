@@ -11,6 +11,7 @@ export class ManageUserComponent implements OnInit {
 
   _urlUser = "http://localhost:8080/api/users";
   users: any;
+  newPassword : String = "";
 
   constructor(private http: HttpClient) {
     this.getUsers();
@@ -35,6 +36,10 @@ export class ManageUserComponent implements OnInit {
       this.http.delete(this._urlUser + "/" + user.mail, { observe: 'response' }).subscribe(response => this.checkResponseStatus(response.status));
       setTimeout(() => { this.users = this.getUsers() }, 4000);
     }
+  }
+
+  resetPassword(user: User) {
+    this.http.post("http://localhost:8080/admin/resetPassword", user).subscribe();
   }
 
   checkResponseStatus(responseStatus: number) {
