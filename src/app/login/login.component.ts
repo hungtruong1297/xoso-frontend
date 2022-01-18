@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         this.resultAuth = response;
         localStorage.setItem('id_token', this.resultAuth.token); // save Token to localStorage
         localStorage.setItem('username', this.resultAuth.username); // save Mail to localStorage
-        this.router.navigate(['']);
+        this.router.navigate(['/manage-user']);
       })
   }
 }

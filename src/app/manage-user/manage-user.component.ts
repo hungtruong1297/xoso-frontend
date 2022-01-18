@@ -1,6 +1,7 @@
 import { User } from './../user';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-user',
@@ -11,9 +12,9 @@ export class ManageUserComponent implements OnInit {
 
   _urlUser = "http://localhost:8080/api/users";
   users: any;
-  newPassword : String = "";
+  newPassword: String = "";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.getUsers();
   }
 
@@ -33,8 +34,14 @@ export class ManageUserComponent implements OnInit {
       return;
     }
     if (confirm("Bạn có muốn xoá không?")) {
-      this.http.delete(this._urlUser + "/" + user.mail, { observe: 'response' }).subscribe(response => this.checkResponseStatus(response.status));
-      setTimeout(() => { this.users = this.getUsers() }, 4000);
+      this.http.delete(this._urlUser + "/" + user.mail, { observe: 'response' })
+        .subscribe();
+      setTimeout(() => {
+        this.users = this.getUsers();
+        this.router.navigate(['/manage-user']);
+      }, 4000);
+
+
     }
   }
 

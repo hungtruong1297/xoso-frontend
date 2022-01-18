@@ -1,34 +1,3 @@
-<form action="" class="form-group">
-  <div>
-    <label for="mailInput">Tìm bằng email</label>
-    <input
-      type="text"
-      id="mailInput"
-      class="form-control"
-      ngModel
-      name="mailInput"
-      #emailInput
-    />
-    <button class="btn btn-primary" (click)="searchUserByMail(emailInput)">
-      Tìm kiếm
-    </button>
-  </div>
-  <div>
-    <label for="phoneInput">Tìm bằng số điện thoại</label>
-    <input
-      type="text"
-      id="phoneInput"
-      class="form-control"
-      ngModel
-      name="phoneInput"
-      #phoneInput
-    />
-    <button class="btn btn-primary" (click)="searchUserByPhone(phoneInput)">
-      Tìm kiếm
-    </button>
-  </div>
-</form>
-
 <div class="container-xl">
   <div class="table-responsive">
     <div class="table-wrapper">
@@ -40,14 +9,14 @@
           <div class="col-sm-6">
             <a
               href="#addEmployeeModal"
-              class="btn btn-success"
+              class="btn btn-success w-30"
               data-toggle="modal"
             >
               <span>Add New Employee</span></a
             >
             <a
               href="#deleteEmployeeModal"
-              class="btn btn-danger"
+              class="btn btn-danger w-30"
               data-toggle="modal"
               ><span>Delete</span></a
             >
@@ -257,3 +226,41 @@
     </div>
   </div>
 </div>
+
+<form action="" class="form-group form form-basic">
+  <h1 class="h3 mb-3 fw-normal">Tìm người dùng</h1>
+  <div class="form-floating">
+    <input
+      type="text"
+      id="mailInput"
+      class="form-control"
+      ngModel
+      name="mailInput"
+      #emailInput
+    />
+    <label for="floatingInput">Tìm bằng Email</label>
+    <button
+      class="w-100 btn btn-lg btn-primary"
+      (click)="searchUserByMail(emailInput)"
+    >
+      Tìm kiếm
+    </button>
+  </div>
+  <div class="form-floating">
+    <input
+      type="text"
+      id="phoneInput"
+      class="form-control"
+      ngModel
+      name="phoneInput"
+      #phoneInput
+    />
+    <label for="floatingInput">Tìm bằng Số điện thoại</label>
+    <button
+      class="w-100 btn btn-lg btn-primary"
+      (click)="searchUserByPhone(phoneInput)"
+    >
+      Tìm kiếm
+    </button>
+  </div>
+</form>
