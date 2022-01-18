@@ -8,9 +8,9 @@
           </div>
           <div class="col-sm-6">
             <a
-              href="#addEmployeeModal"
               class="btn btn-success w-30"
               data-toggle="modal"
+              routerLink="create-user"
             >
               <span>Add New Employee</span></a
             >
@@ -33,7 +33,6 @@
               </span>
             </th>
             <th>Email</th>
-            <th>Password</th>
             <th>Role</th>
             <th>Phone</th>
             <th>Name</th>
@@ -41,7 +40,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of users">
+          <tr
+            *ngFor="
+              let user of users
+                | paginate
+                  : {
+                      itemsPerPage: 5,
+                      currentPage: currentPg
+                    }
+            "
+          >
             <td>
               <span class="custom-checkbox">
                 <input
@@ -56,7 +64,6 @@
             <td>
               {{ user.mail }}
             </td>
-            <td>{{ user.password }}</td>
             <td>
               {{ user.role }}
             </td>
@@ -83,16 +90,8 @@
         </tbody>
       </table>
       <div class="clearfix">
-        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-        <ul class="pagination">
-          <li class="page-item disabled"><a href="#">Previous</a></li>
-          <li class="page-item"><a href="#" class="page-link">1</a></li>
-          <li class="page-item"><a href="#" class="page-link">2</a></li>
-          <li class="page-item active"><a href="#" class="page-link">3</a></li>
-          <li class="page-item"><a href="#" class="page-link">4</a></li>
-          <li class="page-item"><a href="#" class="page-link">5</a></li>
-          <li class="page-item"><a href="#" class="page-link">Next</a></li>
-        </ul>
+        <pagination-controls (pageChange)="currentPg = $event">
+        </pagination-controls>
       </div>
     </div>
   </div>

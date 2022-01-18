@@ -1,3 +1,4 @@
+import { CreateUserComponent } from './create-user/create-user.component';
 import { RoleGuard } from './role.guard';
 import { CanActivate } from '@angular/router';
 import { ManageUserComponent } from './manage-user/manage-user.component';
@@ -16,7 +17,8 @@ const routes: Routes = [
     path: 'manage-user',
     component: ManageUserComponent,
     canActivate: [AuthGuard, RoleGuard]
-  }
+  },
+  { path: 'create-user', component: CreateUserComponent },
 
 ];
 

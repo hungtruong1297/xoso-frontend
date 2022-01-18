@@ -13,6 +13,7 @@ export class ManageUserComponent implements OnInit {
   _urlUser = "http://localhost:8080/api/users";
   users: any;
   newPassword: String = "";
+  currentPg: number = 1;
 
   constructor(private http: HttpClient, private router: Router) {
     this.getUsers();

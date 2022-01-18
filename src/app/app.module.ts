@@ -2,6 +2,7 @@ import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -39,8 +41,9 @@ import { TokenInterceptorService } from './token-interceptor.service';
       { path: 'tao-xo-so', component: CreateLotteryComponent },
       { path: 'create-user', component: CreateUserComponent },
     ]),
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    NoopAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [HttpClientModule,
     {
