@@ -37,7 +37,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
     RouterModule.forRoot([
       { path: 'sua-xo-so', component: SearchLotteryComponent },
       { path: 'tao-xo-so', component: CreateLotteryComponent },
-      { path: 'create-user', component: CreateUserComponent }
+      { path: 'create-user', component: CreateUserComponent },
     ]),
     ReactiveFormsModule
 

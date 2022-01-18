@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -32,8 +34,10 @@ export class LoginComponent implements OnInit {
       .subscribe(response => {
         this.resultAuth = response;
         localStorage.setItem('id_token', this.resultAuth.token); // save Token to localStorage
-        localStorage.setItem('username', this.resultAuth.username); // save Mail to localStorage
-        this.router.navigate(['/manage-user']);
+        localStorage.setItem('username', this.resultAuth.username); // save Username to localStorage
+        localStorage.setItem('role_name', this.resultAuth.role);
+        this.router.navigate(['']);
+        AuthService.isLoggedIn = true;
       })
   }
 }
