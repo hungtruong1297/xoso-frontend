@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('username') == null) {
       Emitters.authEmitter.emit(false);
+      this.message = `You're logged out.`
     } else {
       this.message = `Hello ${localStorage.getItem('username')}`;
       Emitters.authEmitter.emit(true);
