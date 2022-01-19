@@ -2,7 +2,6 @@ import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -42,8 +41,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'create-user', component: CreateUserComponent },
     ]),
     ReactiveFormsModule,
-    NoopAnimationsModule,
-    NgxPaginationModule
+    NoopAnimationsModule
   ],
   providers: [HttpClientModule,
     {

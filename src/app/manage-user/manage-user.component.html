@@ -40,16 +40,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="
-              let user of users
-                | paginate
-                  : {
-                      itemsPerPage: 5,
-                      currentPage: currentPg
-                    }
-            "
-          >
+          <tr *ngFor="let user of users">
             <td>
               <span class="custom-checkbox">
                 <input
@@ -90,8 +81,8 @@
         </tbody>
       </table>
       <div class="clearfix">
-        <pagination-controls (pageChange)="currentPg = $event">
-        </pagination-controls>
+        <!-- <pagination-controls (pageChange)="currentPg = $event">
+        </pagination-controls> -->
       </div>
     </div>
   </div>
