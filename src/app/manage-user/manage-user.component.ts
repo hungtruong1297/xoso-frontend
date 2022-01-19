@@ -27,7 +27,9 @@ export class ManageUserComponent implements OnInit {
     this.http.get(this._urlUser).subscribe(response => this.users = response);
   }
 
-
+  editUser(user: User) {
+    console.log(user);
+  }
 
   deleteUser(user: User) {
     if (user.role == "ADMIN") {

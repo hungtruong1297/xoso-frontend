@@ -14,6 +14,7 @@
             >
               <span>Add New Employee</span></a
             >
+            &nbsp;
             <a
               href="#deleteEmployeeModal"
               class="btn btn-danger w-30"
@@ -65,17 +66,20 @@
               {{ user.name }}
             </td>
             <td>
-              <a href="#editEmployeeModal" class="edit" data-toggle="modal"
-                >Edit
-              </a>
-              <a
-                href="#"
-                (click)="deleteUser(user)"
-                class="delete"
-                data-toggle="modal"
-                >Delete</a
+              <button (click)="editUser(user)" class="btn btn-sm btn-success">
+                <i class="material-icons md-14">build</i>
+              </button>
+              &nbsp;
+              <button class="btn btn-sm btn-danger" (click)="deleteUser(user)">
+                <i class="material-icons md-14">delete_forever</i>
+              </button>
+              &nbsp;
+              <button
+                class="btn btn-sm btn-secondary"
+                (click)="resetPassword(user)"
               >
-              <a href="#" (click)="resetPassword(user)"> Reset Password</a>
+                <i class="material-icons md-14">autorenew</i>
+              </button>
             </td>
           </tr>
         </tbody>

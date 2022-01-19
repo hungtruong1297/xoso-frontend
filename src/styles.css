@@ -29,3 +29,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.material-icons.md-14 {
+  font-size: 14px;
+}
