@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './auth.guard';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,9 +19,8 @@ const routes: Routes = [
     component: ManageUserComponent,
     canActivate: [AuthGuard, RoleGuard]
   },
-  { path: 'create-user', component: CreateUserComponent },
-  // { path: 'edit-user', component: EditUserComponent }
-
+  { path: 'create-user', component: CreateUserComponent, canActivate: [AuthGuard, RoleGuard] },
+  { path: 'edit-user', component: EditUserComponent, canActivate: [AuthGuard, RoleGuard] }
 ];
 
 @NgModule({

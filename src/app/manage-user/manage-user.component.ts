@@ -12,19 +12,28 @@ export class ManageUserComponent implements OnInit {
 
   _urlUser = "http://localhost:8080/api/users";
   users: any;
+  firstName: String = '';
   newPassword: any;
   currentPg: number = 1;
+  filterTerm: string = '';
+  searchInput = {
+    mail: '',
+    phone: ''
+  }
 
   constructor(private http: HttpClient, private router: Router) {
-    this.getUsers();
   }
 
   ngOnInit(): void {
+    this.getUsers();
   }
 
   getUsers() {
     // Get users from Database
-    this.http.get(this._urlUser).subscribe(response => this.users = response);
+    this.http.get(this._urlUser).subscribe(
+      response => {
+        this.users = response;
+      });
   }
 
   editUser(user: User) {

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
-    {{ authForm.value | json }}
+    <h2>Create <b>User</b></h2>
     <form
       class="form-basic"
       action=""
@@ -64,6 +64,7 @@
       <div class="alert alert-danger" *ngIf="isError">
         <p>{{ errorMessage }}</p>
       </div>
+      <div>.</div>
       <div>
         <button
           class="btn btn-primary mr-1"
@@ -72,6 +73,9 @@
         >
           Create User
         </button>
+        <div>
+          {{ authForm.value | json }}
+        </div>
       </div>
     </form>
   </div>

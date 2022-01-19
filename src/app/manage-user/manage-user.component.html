@@ -15,6 +15,10 @@
               <span>Create User</span></a
             >
             &nbsp;
+            <a class="btn btn-info w-30" data-toggle="modal" href="/edit-user">
+              <span>Edit User</span></a
+            >
+            &nbsp;
             <a
               href="#deleteEmployeeModal"
               class="btn btn-danger w-30"
@@ -23,6 +27,15 @@
             >
           </div>
         </div>
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          name="mail"
+          [(ngModel)]="searchInput.mail"
+          placeholder="Search by mail..."
+        />
       </div>
       <table class="table table-striped table-hover">
         <thead>
@@ -44,6 +57,7 @@
           <tr
             *ngFor="
               let user of users
+                | filter: searchInput.mail
                 | paginate: { itemsPerPage: 5, currentPage: currentPg }
             "
           >

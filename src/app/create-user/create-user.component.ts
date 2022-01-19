@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -12,13 +13,8 @@ export class CreateUserComponent implements OnInit {
   _urlUser = "http://localhost:8080/api/users"
   _urlAddUser = "http://localhost:8080/admin/add"
 
-  isLoginMode = true;
   isError: boolean = false;
   errorMessage: any;
-
-  onSwitchMode() {
-    this.isLoginMode = !this.isLoginMode;
-  }
 
   onSubmit(authForm: NgForm) {
     this.isError = false;
@@ -26,17 +22,21 @@ export class CreateUserComponent implements OnInit {
       .post(this._urlAddUser, authForm.value)
       .subscribe(
         response => {
-          console.log(response);
+          alert('User added.');
+          authForm.reset();
+          this.router.navigate(['manage-user']);
         },
-        errorMessage => {
+        error => {
           this.isError = true;
-          this.errorMessage = errorMessage.error;
+          this.errorMessage = error.error;
+          console.log(error.error);
         }
       )
-    authForm.reset();
+
+
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.getRoles();

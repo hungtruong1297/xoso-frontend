@@ -17,6 +17,9 @@ import { HomeComponent } from './home/home.component';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NavComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ]),
     ReactiveFormsModule,
     NoopAnimationsModule,
-    NgxPaginationModule   //Source: https://www.npmjs.com/package/ngx-pagination
+    NgxPaginationModule,   //Source: https://www.npmjs.com/package/ngx-pagination
+    Ng2SearchPipeModule,
+    OrderModule
   ],
   providers: [HttpClientModule,
     {
