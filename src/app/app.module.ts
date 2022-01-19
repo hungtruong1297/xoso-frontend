@@ -16,7 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -37,11 +37,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     RouterModule.forRoot([
       { path: 'sua-xo-so', component: SearchLotteryComponent },
-      { path: 'tao-xo-so', component: CreateLotteryComponent },
-      { path: 'create-user', component: CreateUserComponent },
+      { path: 'tao-xo-so', component: CreateLotteryComponent }
     ]),
     ReactiveFormsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    NgxPaginationModule   //Source: https://www.npmjs.com/package/ngx-pagination
   ],
   providers: [HttpClientModule,
     {

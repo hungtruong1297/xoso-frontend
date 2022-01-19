@@ -19,6 +19,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, RoleGuard]
   },
   { path: 'create-user', component: CreateUserComponent },
+  // { path: 'edit-user', component: EditUserComponent }
 
 ];
 

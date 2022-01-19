@@ -12,7 +12,7 @@ export class ManageUserComponent implements OnInit {
 
   _urlUser = "http://localhost:8080/api/users";
   users: any;
-  newPassword: String = "";
+  newPassword: any;
   currentPg: number = 1;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -49,7 +49,14 @@ export class ManageUserComponent implements OnInit {
   }
 
   resetPassword(user: User) {
-    this.http.post("http://localhost:8080/admin/resetPassword", user).subscribe();
+    if (confirm("Do you want to reset password for this user? ")) {
+      this.http.post("http://localhost:8080/admin/resetPassword", user).subscribe(
+        response => {
+          this.newPassword = response;
+          alert("New password: " + this.newPassword.newPassword);
+        }
+      );
+    }
   }
 
   checkResponseStatus(responseStatus: number) {
