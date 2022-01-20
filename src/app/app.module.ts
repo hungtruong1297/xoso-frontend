@@ -20,6 +20,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { OrderModule } from 'ngx-order-pipe';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    EditUserComponent
+    EditUserComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

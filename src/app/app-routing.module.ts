@@ -1,3 +1,4 @@
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { RoleGuard } from './role.guard';
 import { CanActivate } from '@angular/router';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forgot', component: ResetPasswordComponent },
   {
     path: 'manage-user',
     component: ManageUserComponent,

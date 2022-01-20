@@ -62,7 +62,7 @@ export class ManageUserComponent implements OnInit {
       this.http.post("http://localhost:8080/admin/resetPassword", user).subscribe(
         response => {
           this.newPassword = response;
-          alert("New password: " + this.newPassword.newPassword);
+          alert("New password: " + this.newPassword.message);
         }
       );
     }
