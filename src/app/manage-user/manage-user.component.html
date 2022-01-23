@@ -7,13 +7,9 @@
             <h2>Manage <b>Users</b></h2>
           </div>
           <div class="col-sm-6">
-            <a
-              class="btn btn-success w-30"
-              data-toggle="modal"
-              href="/create-user"
-            >
-              <span>Create User</span></a
-            >
+            <button class="btn btn-success w-30" (click)="createUser()">
+              <span>Create User</span>
+            </button>
             &nbsp;
             <a class="btn btn-info w-30" data-toggle="modal" href="/edit-user">
               <span>Edit User</span></a
@@ -76,7 +72,7 @@
               {{ user.mail }}
             </td>
             <td>
-              {{ user.role }}
+              {{ user.roles[0].roleName }}
             </td>
             <td>
               {{ user.phone }}
@@ -85,7 +81,11 @@
               {{ user.name }}
             </td>
             <td>
-              <button (click)="editUser(user)" class="btn btn-sm btn-success">
+              <button (click)="makeAdmin(user)" class="btn btn-success btn-sm">
+                <i class="material-icons md-14"> upgrade </i>
+              </button>
+              &nbsp;
+              <button (click)="editUser(user)" class="btn btn-sm btn-info">
                 <i class="material-icons md-14">build</i>
               </button>
               &nbsp;

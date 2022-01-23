@@ -1,7 +1,11 @@
+import { CreateUserComponent } from './../create-user/create-user.component';
+import { RegisterComponent } from './../register/register.component';
+import { EditUserComponent } from './../edit-user/edit-user.component';
 import { User } from './../user';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manage-user',
@@ -21,7 +25,9 @@ export class ManageUserComponent implements OnInit {
     phone: ''
   }
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient,
+    private router: Router,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -36,12 +42,24 @@ export class ManageUserComponent implements OnInit {
       });
   }
 
+  createUser() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true; // alow Esc and click outside to close the dialog
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '400px';
+
+    this.dialog.open(CreateUserComponent);
+    console.log('Create button works');
+  }
+
   editUser(user: User) {
+
+
     console.log(user);
   }
 
-  deleteUser(user: User) {
-    if (user.role == "ADMIN") {
+  deleteUser(user: any) {
+    if (user.roles[0].roleName == "ADMIN") {
       alert("Không xoá được vai trò Admin");
       return;
     }
@@ -74,6 +92,27 @@ export class ManageUserComponent implements OnInit {
     }
     else
       alert("Xoá không thành công");
+  }
+
+  makeAdmin(user: any) {
+
+
+    if (confirm('Make this user as Admin?')) {
+      if (user.roles[0].roleName == "ADMIN") {
+        alert("User is Admin already");
+        return;
+      }
+
+      this.http.patch(this._urlUser, user.id)
+        .subscribe(
+          {
+            error: (e) => console.error(e),
+            complete: () => { alert('Admin Granted.'); this.ngOnInit() }
+          }
+        );
+    }
+
+
   }
 
   searchUserByMail(emailInput: HTMLInputElement) {

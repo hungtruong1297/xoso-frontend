@@ -21,6 +21,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     NoopAnimationsModule,
     NgxPaginationModule,   //Source: https://www.npmjs.com/package/ngx-pagination
     Ng2SearchPipeModule,
-    OrderModule
+    OrderModule,
+    MatDialogModule
   ],
   providers: [HttpClientModule,
     {
