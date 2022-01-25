@@ -2,6 +2,7 @@ import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table'
 
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SearchHistoryComponent } from './search-history/search-history.component';
+import { SearchLotteryUserComponent } from './search-lottery-user/search-lottery-user.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     RegisterComponent,
     HomeComponent,
     EditUserComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    SearchHistoryComponent,
+    SearchLotteryUserComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgxPaginationModule,   //Source: https://www.npmjs.com/package/ngx-pagination
     Ng2SearchPipeModule,
     OrderModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [HttpClientModule,
     {

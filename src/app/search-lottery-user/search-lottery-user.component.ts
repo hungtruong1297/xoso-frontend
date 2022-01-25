@@ -5,11 +5,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-search-lottery',
-  templateUrl: './search-lottery.component.html',
-  styleUrls: ['./search-lottery.component.css']
+  selector: 'app-search-lottery-user',
+  templateUrl: './search-lottery-user.component.html',
+  styleUrls: ['./search-lottery-user.component.css']
 })
-export class SearchLotteryComponent implements OnInit {
+export class SearchLotteryUserComponent implements OnInit {
   // http;
 
   _urlResult = "http://localhost:8080/api/results";
@@ -18,7 +18,6 @@ export class SearchLotteryComponent implements OnInit {
 
   provinces: any;
   results: any;
-  isWin = false;
 
   // dateInput = "";
   // provinceInput = "Dak Lak";
@@ -28,9 +27,6 @@ export class SearchLotteryComponent implements OnInit {
   selectedProvince = new Province(-1, "Empty");
 
   constructor(private http: HttpClient) {
-  }
-
-  ngOnInit(): void {
     this.getProvinces();
   }
 
@@ -40,8 +36,13 @@ export class SearchLotteryComponent implements OnInit {
     let provinceId = f.value.id;
 
     this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
-    this.http.get(this.updatedURL).subscribe(response => this.results = response);
+    this.http.get(this.updatedURL)
+      .subscribe(response => this.results = response);
+
+    // console.log(this.results[0]);
   }
+
+
 
   getProvinces() {
     // Get data from Server
@@ -67,25 +68,12 @@ export class SearchLotteryComponent implements OnInit {
       }]
   }
 
-  update(result: Result, newResult: HTMLInputElement) {
-    result.result = newResult.value;
-    // console.log(newResult);
-    this.http.put(this._urlResult + "/" + result.id, result).subscribe(response => { console.log(response) })
-    newResult.value = "";
+
+
+
+
+
+  ngOnInit(): void {
   }
-
-  deleteConfirm(result: Result) {
-    if (confirm("Do you really want to delete this?")) {
-      this.delete(result);
-    }
-  }
-  delete(result: Result) {
-    this.http.delete(this._urlResult + "/" + result.id).subscribe(response => { console.log(response) })
-  }
-
-
-
-
-
 
 }

@@ -49,7 +49,6 @@ export class ManageUserComponent implements OnInit {
     dialogConfig.width = '400px';
 
     this.dialog.open(CreateUserComponent);
-    console.log('Create button works');
   }
 
   editUser(user: User) {
