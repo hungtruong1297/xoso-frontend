@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="submit(f)">
+<form [formGroup]="searchLotteryForm" (ngSubmit)="submit(searchLotteryForm)">
   <div>
     <div class="form-group">
       <label for="date">Ngày</label>
@@ -6,30 +6,25 @@
         type="text"
         required
         class="form-control"
+        formControlName="date"
         placeholder="dd-MM-yyy"
         id="date"
-        value="28-11-2021"
-        ngModel
-        name="date"
-        #date="ngModel"
       />
     </div>
-    <div class="alert alert-danger" *ngIf="date.touched && date.invalid">
+    <!-- <div class="alert alert-danger" *ngIf="date.touched && date.invalid">
       <div *ngIf="date.errors">
         Vui lòng nhập lại ngày theo định dạng dd-MM-yyyy. Ví dụ: 28-11-2021
       </div>
-    </div>
+    </div> -->
   </div>
   <div>
     <div class="form-group">
       <label for="province">Tỉnh</label>
       <select
-        ngModel
-        name="id"
         id="province"
         class="form-control"
+        formControlName="provinceId"
         required
-        #province="ngModel"
       >
         <option *ngFor="let province of provinces" [value]="province.id">
           {{ province.name }}
@@ -39,8 +34,40 @@
   </div>
   <div>
     <div class="form-group">
+      <label for="roles">Role</label>
+      <!-- v1 -->
+      <!-- <div id="roles" *ngFor="let role of roles" class="form-control">
+        <input type="checkbox" id="{{ role.id }}" formArrayName="roles" />
+        <label for="{{ role.id }}">{{ role.name }}</label>
+      </div> -->
+      <!-- v2 -->
+      <!-- <div
+        id="roles"
+        class="checkbox"
+        *ngFor="let role of roles; let i = index"
+      >
+        <label>
+          <input type="checkbox" formArrayName="roles" [value]="role" />
+          {{ role.name }}
+        </label>
+      </div> -->
+      <!-- v3 -->
+      <div *ngFor="let role of roles">
+        <mat-checkbox color="primary" [value]="role.id">
+          {{ role.name }}</mat-checkbox
+        >
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="form-group">
       <label for="value">Value</label>
-      <input type="text" ngModel name="value" class="form-control" required />
+      <input
+        type="text"
+        class="form-control"
+        required
+        formControlName="value"
+      />
     </div>
   </div>
   <!-- Normal 2 input fields -->
@@ -71,12 +98,18 @@
         />
       </div>
     </div> -->
-  <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
+  <button
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="searchLotteryForm.invalid"
+  >
     Dò vé
   </button>
-  <button class="btn btn-warning" (click)="f.reset()">Xoá form</button>
+  <button class="btn btn-warning" (click)="searchLotteryForm.reset()">
+    Xoá form
+  </button>
 </form>
-{{ f.value | json }}
+{{ searchLotteryForm.value | json }}
 <div>
   <table class="table table-bordered">
     <thead>

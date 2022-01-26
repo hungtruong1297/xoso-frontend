@@ -1,3 +1,4 @@
+import { SearchLotteryUserComponent } from './search-lottery-user/search-lottery-user.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { RoleGuard } from './role.guard';

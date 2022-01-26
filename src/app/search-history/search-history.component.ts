@@ -1,6 +1,9 @@
+import { SearchHistoryService } from './search-history.service';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { of } from 'rxjs';
 
 export interface SearchHistory {
   id: number;
@@ -8,10 +11,12 @@ export interface SearchHistory {
   date: string;
   provinceName: string;
   searchValue: string;
+  checked?: boolean;
 }
 
-const SEARCH_HISTORY_DATA: SearchHistory[] = [
+const DATA_SOURCE: SearchHistory[] = [
   {
+
     "id": 14,
     "userMail": "0012Postman@postman.com",
     "date": "2021-11-27T17:00:00.000+00:00",
@@ -89,30 +94,47 @@ const SEARCH_HISTORY_DATA: SearchHistory[] = [
   styleUrls: ['./search-history.component.css']
 })
 export class SearchHistoryComponent implements OnInit {
+  msg: string = '';
+  clss: string = '';
+  searchHistories: SearchHistory[] = [];
 
-  displayedColumns: string[] = ['id', 'userMail', 'date', 'province', 'searchValue', 'deleteAction'];
+  constructor(private searchHistoryService: SearchHistoryService) { }
 
-  // dataSource!: MatTableDataSource<any>;
-  dataSource = new MatTableDataSource(SEARCH_HISTORY_DATA);
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  delete(element: SearchHistory) {
-    console.log(element);
+  ngOnInit() {
+    this.getSearchHistoryService();
   }
 
-
-  constructor() { }
-
-  ngOnInit(): void {
-    // dataSource = SEARCH_HISTORY_DATA;
-    // this.dataSource = new MatTableDataSource(SEARCH_HISTORY_DATA);
-    // console.log(SEARCH_HISTORY_DATA);
+  getSearchHistoryService(): void {
+    // this.searchHistories = DATA_SOURCE;
+    this.searchHistoryService.getSearchHistories().subscribe(searchHistories => this.searchHistories = searchHistories);
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource.paginator);
+  checkAllCheckBox(ev: any) {
+    this.searchHistories.forEach(x => x.checked = ev.target.checked)
+  }
+
+  isAllCheckBoxChecked() {
+    return this.searchHistories.every(s => s.checked);
+  }
+
+  deleteSearchHistories(): void {
+    const selectedSearchHistory = this.searchHistories.filter(searchHistory => searchHistory.checked).map(s => s.id);
+    console.log(selectedSearchHistory);
+
+    if (selectedSearchHistory && selectedSearchHistory.length > 0) {
+      this.searchHistoryService.deleteSearchHistories(selectedSearchHistory as number[])
+        .subscribe(res => {
+          this.clss = 'grn';
+          this.msg = 'Search Histories successfully deleted';
+        }, err => {
+          this.clss = 'rd';
+          this.msg = 'Something went wrong during deleting Search Histories';
+        }
+        );
+    } else {
+      this.clss = 'rd';
+      this.msg = 'You must select at least one Search History';
+    }
   }
 
 }

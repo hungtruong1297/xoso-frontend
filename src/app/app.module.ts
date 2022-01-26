@@ -26,6 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SearchHistoryComponent } from './search-history/search-history.component';
 import { SearchLotteryUserComponent } from './search-lottery-user/search-lottery-user.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     OrderModule,
     MatDialogModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatTreeModule
   ],
   providers: [HttpClientModule,
     {

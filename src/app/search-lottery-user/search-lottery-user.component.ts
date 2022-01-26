@@ -2,7 +2,9 @@ import { Province } from './../province';
 import { Result } from './../result';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm, FormControl, FormArray } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 @Component({
   selector: 'app-search-lottery-user',
@@ -18,28 +20,38 @@ export class SearchLotteryUserComponent implements OnInit {
 
   provinces: any;
   results: any;
+  roles: any;
 
-  // dateInput = "";
-  // provinceInput = "Dak Lak";
-  // provinceCode = "17";
+  searchLotteryForm!: FormGroup;
 
   selectedDate: any;
   selectedProvince = new Province(-1, "Empty");
 
   constructor(private http: HttpClient) {
-    this.getProvinces();
   }
 
-  submit(f: NgForm) {
-    console.log(f);
-    let date = f.value.date;
-    let provinceId = f.value.id;
+  submit(f: FormGroup) {
+    // console.log(f);
+    // let date = f.value.date;
+    // let provinceId = f.value.id;
 
-    this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
-    this.http.get(this.updatedURL)
-      .subscribe(response => this.results = response);
+    // this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
+    // this.http.get(this.updatedURL)
+    //   .subscribe(response => this.results = response);
+    console.log(this.searchLotteryForm.value);
 
     // console.log(this.results[0]);
+  }
+
+  ngOnInit(): void {
+    this.getProvinces();
+    this.getRoles();
+    this.searchLotteryForm = new FormGroup({
+      'date': new FormControl(null),
+      'provinceId': new FormControl(null),
+      'value': new FormControl(null),
+      'roles': new FormArray([])
+    });
   }
 
 
@@ -68,12 +80,23 @@ export class SearchLotteryUserComponent implements OnInit {
       }]
   }
 
-
-
-
-
-
-  ngOnInit(): void {
+  getRoles() {
+    this.roles = [{
+      "id": 1,
+      "name": "ADMIN"
+    },
+    {
+      "id": 2,
+      "name": "USER"
+    }
+    ]
   }
+
+
+
+
+
+
+
 
 }
