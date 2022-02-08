@@ -28,6 +28,8 @@ import { SearchLotteryUserComponent } from './search-lottery-user/search-lottery
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { MatTreeModule } from '@angular/material/tree';
     MatTableModule,
     MatPaginatorModule,
     MatCheckboxModule,
-    MatTreeModule
+    MatTreeModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [HttpClientModule,
     {

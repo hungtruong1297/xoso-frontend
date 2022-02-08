@@ -1,3 +1,4 @@
+import { User } from './../user';
 import { Province } from './../province';
 import { Result } from './../result';
 import { HttpClient } from '@angular/common/http';
@@ -39,18 +40,25 @@ export class SearchLotteryUserComponent implements OnInit {
     // this.http.get(this.updatedURL)
     //   .subscribe(response => this.results = response);
     console.log(this.searchLotteryForm.value);
+    this.http.post("http://localhost:8080/api/searchHistory/add", this.searchLotteryForm.value)
+      .subscribe({
+        next: (v: any) => alert(v.message),
+        error: (e) => console.error(e),
+        complete: () => {
+          console.info('complete');
+        }
+      });
 
     // console.log(this.results[0]);
   }
 
   ngOnInit(): void {
     this.getProvinces();
-    this.getRoles();
     this.searchLotteryForm = new FormGroup({
-      'date': new FormControl(null),
+      'userMail': new FormControl(localStorage.getItem('username')),
       'provinceId': new FormControl(null),
-      'value': new FormControl(null),
-      'roles': new FormArray([])
+      'searchValue': new FormControl(null),
+      'date': new FormControl(null)
     });
   }
 
@@ -80,17 +88,7 @@ export class SearchLotteryUserComponent implements OnInit {
       }]
   }
 
-  getRoles() {
-    this.roles = [{
-      "id": 1,
-      "name": "ADMIN"
-    },
-    {
-      "id": 2,
-      "name": "USER"
-    }
-    ]
-  }
+
 
 
 

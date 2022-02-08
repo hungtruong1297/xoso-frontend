@@ -1,24 +1,6 @@
 <form [formGroup]="searchLotteryForm" (ngSubmit)="submit(searchLotteryForm)">
   <div>
     <div class="form-group">
-      <label for="date">Ngày</label>
-      <input
-        type="text"
-        required
-        class="form-control"
-        formControlName="date"
-        placeholder="dd-MM-yyy"
-        id="date"
-      />
-    </div>
-    <!-- <div class="alert alert-danger" *ngIf="date.touched && date.invalid">
-      <div *ngIf="date.errors">
-        Vui lòng nhập lại ngày theo định dạng dd-MM-yyyy. Ví dụ: 28-11-2021
-      </div>
-    </div> -->
-  </div>
-  <div>
-    <div class="form-group">
       <label for="province">Tỉnh</label>
       <select
         id="province"
@@ -34,41 +16,24 @@
   </div>
   <div>
     <div class="form-group">
-      <label for="roles">Role</label>
-      <!-- v1 -->
-      <!-- <div id="roles" *ngFor="let role of roles" class="form-control">
-        <input type="checkbox" id="{{ role.id }}" formArrayName="roles" />
-        <label for="{{ role.id }}">{{ role.name }}</label>
-      </div> -->
-      <!-- v2 -->
-      <!-- <div
-        id="roles"
-        class="checkbox"
-        *ngFor="let role of roles; let i = index"
-      >
-        <label>
-          <input type="checkbox" formArrayName="roles" [value]="role" />
-          {{ role.name }}
-        </label>
-      </div> -->
-      <!-- v3 -->
-      <div *ngFor="let role of roles">
-        <mat-checkbox color="primary" [value]="role.id">
-          {{ role.name }}</mat-checkbox
-        >
-      </div>
-    </div>
-  </div>
-  <div>
-    <div class="form-group">
       <label for="value">Value</label>
       <input
         type="text"
         class="form-control"
         required
-        formControlName="value"
+        formControlName="searchValue"
       />
     </div>
+  </div>
+  <div class="form-group">
+    <input
+      matInput
+      [matDatepicker]="picker"
+      class="form-control"
+      formControlName="date"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </div>
   <!-- Normal 2 input fields -->
   <!-- Kinda different syntax between ngModelGroup="province" and ngModel name="id" -->
