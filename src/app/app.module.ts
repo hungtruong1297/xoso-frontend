@@ -30,6 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SubmitFileComponent } from './submit-file/submit-file.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     EditUserComponent,
     ResetPasswordComponent,
     SearchHistoryComponent,
-    SearchLotteryUserComponent
+    SearchLotteryUserComponent,
+    SubmitFileComponent
   ],
   imports: [
     BrowserModule,
