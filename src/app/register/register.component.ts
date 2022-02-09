@@ -31,7 +31,10 @@ export class RegisterComponent implements OnInit {
   submit() {
     this.http.post('http://localhost:8080/api/register', this.form.getRawValue())
       .subscribe({
-        complete: () => this.router.navigate(['/login']), // after submitting, will navigate to /login
+        complete: () => {
+          alert("OK");
+          this.router.navigate(['/login'])
+        }, // after submitting, will navigate to /login
         error: (e) => alert(e.error)
       })
 

@@ -56,7 +56,8 @@ import { SubmitFileComponent } from './submit-file/submit-file.component';
     FormsModule,
     RouterModule.forRoot([
       { path: 'sua-xo-so', component: SearchLotteryComponent },
-      { path: 'tao-xo-so', component: CreateLotteryComponent }
+      { path: 'tao-xo-so', component: CreateLotteryComponent },
+      { path: 'register', component: RegisterComponent }
     ]),
     ReactiveFormsModule,
     NoopAnimationsModule,

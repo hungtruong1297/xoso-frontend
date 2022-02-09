@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    // console.log(this.form.getRawValue());
     this.http
       .post("http://localhost:8080/api/login", this.form.getRawValue())
       .subscribe(response => {
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('id_token', this.resultAuth.token); // save Token to localStorage
         localStorage.setItem('username', this.resultAuth.username); // save Username to localStorage
         localStorage.setItem('role_name', this.resultAuth.role);
+        alert("login successfully");
         this.router.navigate(['']);
         AuthService.isLoggedIn = true;
       })
