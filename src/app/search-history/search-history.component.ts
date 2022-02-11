@@ -97,6 +97,10 @@ export class SearchHistoryComponent implements OnInit {
   msg: string = '';
   clss: string = '';
   searchHistories: SearchHistory[] = [];
+  searchInput = {
+    date: '',
+    province: ''
+  }
 
   constructor(private searchHistoryService: SearchHistoryService) { }
 

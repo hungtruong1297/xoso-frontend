@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Emitters } from '../emitters/emitters';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   message = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('username') == null) {
@@ -21,18 +22,10 @@ export class HomeComponent implements OnInit {
       this.message = `Hello ${localStorage.getItem('username')}`;
       Emitters.authEmitter.emit(true);
     }
+  }
 
-    // this.http.get('http://localhost:8080/api/users')
-    //   .subscribe(
-    //     (res: any) => {
-    //       this.message = `Hello ${localStorage.getItem('username')}`;
-    //       Emitters.authEmitter.emit(true);
-    //     },
-    //     error => {
-    //       this.message = `You're not logged in.`
-    //       Emitters.authEmitter.emit(false);
-    //     }
-    //   )
+  navigate() {
+    this.router.navigate(['search-lottery-user']);
   }
 
 }

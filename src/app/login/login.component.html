@@ -52,6 +52,14 @@
                           Không được bỏ trống.
                         </small>
                       </div>
+                      <!-- Show Error Message -->
+                      <div
+                        *ngIf="isError == true"
+                        style="color: brown"
+                        class="small"
+                      >
+                        {{ message }}
+                      </div>
                     </div>
                     <!-- <div class="form-group">
                         <div class="custom-control custom-checkbox small">

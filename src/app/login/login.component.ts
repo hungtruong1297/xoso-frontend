@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   form !: FormGroup;
   isError!: boolean;
-  message!: String;
+  message = '';
 
   ngOnInit(): void {
     this.form = new FormGroup(
@@ -43,10 +43,22 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('username', this.resultAuth.username); // save Username to localStorage
             localStorage.setItem('role_name', this.resultAuth.role);
           },
-          error: (e) => console.error(e),
+          error: (e) => {
+            this.isError = true;
+
+            // console.log(e);
+            // console.log(e.status == 403);
+            if (e.status == 403) {
+              this.message = "Email hoặc mật khẩu không hợp lệ."
+            }
+
+            if (e.status >= 500) {
+              this.message = "Lỗi server."
+            }
+          },
           complete: () => {
             AuthService.isLoggedIn = true;
-            alert('Success.');
+            alert('Đăng nhập thành công');
             this.router.navigate(['']);
           }
         }
