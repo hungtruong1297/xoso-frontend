@@ -32,6 +32,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SubmitFileComponent } from './submit-file/submit-file.component';
 import { DatePipe } from '@angular/common';
+import { HomeUserComponent } from './home-user/home-user.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { DatePipe } from '@angular/common';
     ResetPasswordComponent,
     SearchHistoryComponent,
     SearchLotteryUserComponent,
-    SubmitFileComponent
+    SubmitFileComponent,
+    HomeUserComponent
   ],
   imports: [
     BrowserModule,

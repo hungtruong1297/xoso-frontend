@@ -1,14 +1,14 @@
-import { Router } from '@angular/router';
-import { Emitters } from '../emitters/emitters';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Emitters } from '../emitters/emitters';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-home-user',
+  templateUrl: './home-user.component.html',
+  styleUrls: ['./home-user.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeUserComponent implements OnInit {
 
   message = '';
 
@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   }
 
   navigate() {
-    this.router.navigate(['search-lottery']);
+    this.router.navigate(['search-lottery-user']);
   }
-
 }

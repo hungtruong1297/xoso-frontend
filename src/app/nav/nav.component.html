@@ -3,7 +3,18 @@
   class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"
 >
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="home" routerLinkActive="active"
+    <a
+      class="navbar-brand"
+      routerLink="home"
+      routerLinkActive="active"
+      *ngIf="isAdmin"
+      >Trang chủ</a
+    >
+    <a
+      class="navbar-brand"
+      routerLink="home-user"
+      routerLinkActive="active"
+      *ngIf="isUser"
       >Trang chủ</a
     >
     <div>

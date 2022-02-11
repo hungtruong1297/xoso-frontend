@@ -1,3 +1,5 @@
+import { SubmitFileComponent } from './submit-file/submit-file.component';
+import { HomeUserComponent } from './home-user/home-user.component';
 import { CreateLotteryComponent } from './create-lottery/create-lottery.component';
 import { SearchHistoryComponent } from './search-history/search-history.component';
 import { AppComponent } from './app.component';
@@ -17,10 +19,12 @@ import { AuthGuard } from './auth.guard';
 import { EditUserComponent } from './edit-user/edit-user.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot', component: ResetPasswordComponent },
+
+  // Admin Page
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard, RoleGuard] },
   {
     path: 'manage-user',
     component: ManageUserComponent,
@@ -35,6 +39,13 @@ const routes: Routes = [
     path: 'search-lottery',
     component: SearchLotteryComponent,
     canActivate: [AuthGuard, RoleGuard]
+  },
+
+  // User Page
+  {
+    path: 'home-user',
+    component: HomeUserComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'search-lottery-user',

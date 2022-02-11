@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
             // console.log(e);
             // console.log(e.status == 403);
             if (e.status == 403) {
-              this.message = "Email hoặc mật khẩu không hợp lệ."
+              this.message = "Email hoặc mật khẩu không đúng."
             }
 
             if (e.status >= 500) {
@@ -59,7 +59,11 @@ export class LoginComponent implements OnInit {
           complete: () => {
             AuthService.isLoggedIn = true;
             alert('Đăng nhập thành công');
-            this.router.navigate(['']);
+            if (localStorage.getItem('role_name') === 'ADMIN') {
+              this.router.navigate(['home']);
+            } else {
+              this.router.navigate(['home-user']);
+            }
           }
         }
       )
