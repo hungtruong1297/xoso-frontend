@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Province } from './../province';
 import { Result } from './../result';
 import { HttpClient } from '@angular/common/http';
@@ -27,7 +28,7 @@ export class SearchLotteryComponent implements OnInit {
   selectedDate: any;
   selectedProvince = new Province(-1, "Empty");
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -69,20 +70,23 @@ export class SearchLotteryComponent implements OnInit {
 
   update(result: Result, newResult: HTMLInputElement) {
     result.result = newResult.value;
-    // console.log(newResult);
     this.http.put(this._urlResult + "/" + result.id, result).subscribe(response => { console.log(response) })
     newResult.value = "";
   }
 
   deleteConfirm(result: Result) {
-    if (confirm("Do you really want to delete this?")) {
+    if (confirm("Bạn muốn Xoá kết quả này??")) {
       this.delete(result);
     }
   }
   delete(result: Result) {
-    this.http.delete(this._urlResult + "/" + result.id).subscribe(response => { console.log(response) })
+    this.http.delete(this._urlResult + "/" + result.id)
+      .subscribe(() => { alert('Xoá thành công.') })
   }
 
+  navigateCreateLottery() {
+    this.router.navigate(['create-lottery']);
+  }
 
 
 

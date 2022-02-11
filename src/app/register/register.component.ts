@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({});
+  form!: FormGroup;
 
 
   constructor(
@@ -21,9 +21,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuidler.group({
-      name: '',
-      mail: '',
-      password: '',
+      name: new FormControl('', Validators.required),
+      mail: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
       phone: ''
     });
   }
@@ -37,8 +37,20 @@ export class RegisterComponent implements OnInit {
         }, // after submitting, will navigate to /login
         error: (e) => alert(e.error)
       })
+  }
 
+  get mail() {
+    return this.form.get('mail');
+  }
+  get name() {
+    return this.form.get('name');
+  }
 
+  get password() {
+    return this.form.get('password');
+  }
 
+  get phone() {
+    return this.form.get('phone');
   }
 }

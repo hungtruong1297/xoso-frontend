@@ -43,18 +43,20 @@ export class ManageUserComponent implements OnInit {
   }
 
   createUser() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true; // alow Esc and click outside to close the dialog
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '400px';
+    // const dialogConfig = new MatDialogConfig();
+    // dialogConfig.disableClose = true; // alow Esc and click outside to close the dialog
+    // dialogConfig.autoFocus = true;
+    // dialogConfig.width = '600px';
+    // dialogConfig.maxHeight = '500px';
 
-    this.dialog.open(CreateUserComponent);
+    const dialogRef = this.dialog.open(CreateUserComponent, {
+      width: '550px', height: '600px'
+    })
   }
 
-  editUser(user: User) {
 
-
-    console.log(user);
+  editUser() {
+    alert('Chức năng này đang được phát triển.')
   }
 
   deleteUser(user: any) {
@@ -64,18 +66,23 @@ export class ManageUserComponent implements OnInit {
     }
     if (confirm("Bạn có muốn xoá không?")) {
       this.http.delete(this._urlUser + "/" + user.mail, { observe: 'response' })
-        .subscribe();
-      setTimeout(() => {
-        this.users = this.getUsers();
-        this.router.navigate(['/manage-user']);
-      }, 4000);
-
-
+        .subscribe({
+          next: (v) => console.log(v),
+          error: (e) => {
+            console.error(e);
+            alert('Xoá không thành công.')
+          },
+          complete: () => {
+            alert('Xoá thành công.');
+            this.users = this.getUsers();
+          }
+        }
+        );
     }
   }
 
   resetPassword(user: User) {
-    if (confirm("Do you want to reset password for this user? ")) {
+    if (confirm("Bạn có muốn khôi phục mật khẩu cho User này?")) {
       this.http.post("http://localhost:8080/admin/resetPassword", user).subscribe(
         response => {
           this.newPassword = response;
@@ -94,11 +101,9 @@ export class ManageUserComponent implements OnInit {
   }
 
   makeAdmin(user: any) {
-
-
-    if (confirm('Make this user as Admin?')) {
+    if (confirm('Cấp quyền Admin cho ' + user.mail + '?')) {
       if (user.roles[0].roleName == "ADMIN") {
-        alert("User is Admin already");
+        alert("User này đã là Admin rồi.");
         return;
       }
 

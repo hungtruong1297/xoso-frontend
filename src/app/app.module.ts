@@ -54,11 +54,7 @@ import { SubmitFileComponent } from './submit-file/submit-file.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: 'sua-xo-so', component: SearchLotteryComponent },
-      { path: 'tao-xo-so', component: CreateLotteryComponent },
-      { path: 'register', component: RegisterComponent }
-    ]),
+    RouterModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
     NgxPaginationModule,   //Source: https://www.npmjs.com/package/ngx-pagination

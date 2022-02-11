@@ -1,45 +1,49 @@
-<h1>Delete Multiple Table Rows from Server using Angular</h1>
+<div class="card-body">
+  <h1>Lịch sử Dò vé số</h1>
 
-<div *ngIf="searchHistories && searchHistories.length > 0">
-  <div *ngIf="msg" [ngClass]="clss">{{ msg }}</div>
-  <button type="button" (click)="deleteSearchHistories()">
-    Delete Selected Product(s)
-  </button>
-  <table class="datatable">
-    <thead>
-      <tr>
-        <th>
-          <input
-            type="checkbox"
-            [checked]="isAllCheckBoxChecked()"
-            (change)="checkAllCheckBox($event)"
-          />
-        </th>
-        <th>ID</th>
-        <th>User</th>
-        <th>Date</th>
-        <th>Province</th>
-        <th>Search Value</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="let s of searchHistories; let i = index; let odd = odd"
-        [ngClass]="odd ? 'odd_col' : 'even_col'"
-      >
-        <td>
-          <input
-            type="checkbox"
-            value="{{ s.id }}"
-            [(ngModel)]="searchHistories[i].checked"
-          />
-        </td>
-        <td>{{ s.id }}</td>
-        <td>{{ s.userMail }}</td>
-        <td>{{ s.date }}</td>
-        <td>{{ s.provinceName }}</td>
-        <td>{{ s.searchValue }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="searchHistories && searchHistories.length > 0">
+    <div *ngIf="msg" [ngClass]="clss">{{ msg }}</div>
+    <a (click)="deleteSearchHistories()" class="btn btn-danger btn-sm">
+      <span class="text">Xoá các dòng đã chọn</span>
+    </a>
+    <div class="table-responsive">
+      <table class="table table-bordered" width="100%">
+        <thead>
+          <tr>
+            <th>
+              <input
+                type="checkbox"
+                [checked]="isAllCheckBoxChecked()"
+                (change)="checkAllCheckBox($event)"
+              />
+            </th>
+            <th>ID</th>
+            <th>User</th>
+            <th>Ngày</th>
+            <th>Tỉnh</th>
+            <th>Giá trị</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let s of searchHistories; let i = index; let odd = odd"
+            [ngClass]="odd ? 'odd_col' : 'even_col'"
+          >
+            <td>
+              <input
+                type="checkbox"
+                value="{{ s.id }}"
+                [(ngModel)]="searchHistories[i].checked"
+              />
+            </td>
+            <td>{{ s.id }}</td>
+            <td>{{ s.userMail }}</td>
+            <td>{{ s.date }}</td>
+            <td>{{ s.provinceName }}</td>
+            <td>{{ s.searchValue }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

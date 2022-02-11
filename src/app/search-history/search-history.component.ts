@@ -125,15 +125,15 @@ export class SearchHistoryComponent implements OnInit {
       this.searchHistoryService.deleteSearchHistories(selectedSearchHistory as number[])
         .subscribe(res => {
           this.clss = 'grn';
-          this.msg = 'Search Histories successfully deleted';
+          this.msg = 'Xoá thành công.';
         }, err => {
           this.clss = 'rd';
-          this.msg = 'Something went wrong during deleting Search Histories';
+          this.msg = 'Đã có lỗi xảy ra khi xoá.';
         }
         );
     } else {
       this.clss = 'rd';
-      this.msg = 'You must select at least one Search History';
+      this.msg = 'Phải chọn ít nhất một dòng.';
     }
   }
 

@@ -32,13 +32,6 @@ export class SearchLotteryUserComponent implements OnInit {
   }
 
   submit(f: FormGroup) {
-    // console.log(f);
-    // let date = f.value.date;
-    // let provinceId = f.value.id;
-
-    // this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
-    // this.http.get(this.updatedURL)
-    //   .subscribe(response => this.results = response);
     console.log(this.searchLotteryForm.value);
     this.http.post("http://localhost:8080/api/searchHistory/add", this.searchLotteryForm.value)
       .subscribe({
@@ -46,10 +39,19 @@ export class SearchLotteryUserComponent implements OnInit {
         error: (e) => console.error(e),
         complete: () => {
           console.info('complete');
+          this.getResults(f);
         }
       });
 
     // console.log(this.results[0]);
+  }
+  getResults(f: FormGroup) {
+    let date = f.value.date;
+    let provinceId = f.value.id;
+
+    this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
+    this.http.get(this.updatedURL)
+      .subscribe(response => this.results = response);
   }
 
   ngOnInit(): void {

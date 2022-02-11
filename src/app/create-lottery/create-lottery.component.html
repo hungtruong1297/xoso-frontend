@@ -11,9 +11,9 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Tạo vé số đỉnh kao!</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Tạo vé số mới!</h1>
                   </div>
-                  <form #f="ngForm" (ngSubmit)="submit(f)">
+                  <form #f="ngForm">
                     <div>
                       <div class="form-group">
                         <label for="date">Ngày</label>
@@ -85,7 +85,7 @@
                           id="result"
                           class="form-control form-control-user"
                           required
-                          minlength="6"
+                          minlength="2"
                           maxlength="6"
                           pattern="^[0-9]*$"
                           ngModel
@@ -94,21 +94,26 @@
                         />
                         <div *ngIf="result.touched && result.invalid">
                           <div class="alert alert-danger">
-                            Nhập ngày theo định dạng 6 số. Ví dụ: 123456
+                            Nhập Kết quả từ 2 đến 6 số
                           </div>
                         </div>
                       </div>
                     </div>
-                    <button
-                      class="btn btn-primary"
-                      type="submit"
-                      [disabled]="f.invalid"
-                    >
-                      Tạo mới
-                    </button>
-                    <button class="btn btn-default" (click)="f.reset()">
-                      Xoá form
-                    </button>
+                    <div>
+                      <button
+                        class="btn btn-primary"
+                        (click)="submit(f)"
+                        [disabled]="f.invalid"
+                      >
+                        Tạo mới
+                      </button>
+                      <button class="btn btn-default" (click)="f.reset()">
+                        Xoá form
+                      </button>
+                    </div>
+                    <div *ngIf="message != null" class="alert">
+                      {{ message }}
+                    </div>
                   </form>
                 </div>
               </div>

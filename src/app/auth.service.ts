@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   static isLoggedIn: boolean = false;
+  static isAdmin: boolean = false;
 
   constructor() { }
 
@@ -15,4 +16,5 @@ export class AuthService {
     }
     return false;
   }
+
 }

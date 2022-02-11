@@ -4,35 +4,34 @@
       <div class="table-title">
         <div class="row">
           <div class="col-sm-6">
-            <h2>Manage <b>Users</b></h2>
+            <h2>Quản lý <b>Users</b></h2>
           </div>
-          <div class="col-sm-6">
-            <button class="btn btn-success w-30" (click)="createUser()">
-              <span>Create User</span>
-            </button>
-            &nbsp;
-            <a class="btn btn-info w-30" data-toggle="modal" href="/edit-user">
-              <span>Edit User</span></a
-            >
-            &nbsp;
-            <a
-              href="#deleteEmployeeModal"
-              class="btn btn-danger w-30"
-              data-toggle="modal"
-              ><span>Delete</span></a
-            >
-          </div>
+          <div class="col-sm-6"></div>
         </div>
       </div>
-      <div class="form-group">
-        <input
-          type="text"
-          class="form-control"
-          name="mail"
-          [(ngModel)]="searchInput.mail"
-          placeholder="Search by mail..."
-        />
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              name="mail"
+              [(ngModel)]="searchInput.mail"
+              placeholder="Search by mail..."
+            />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <button class="btn btn-success w-30" (click)="createUser()">
+            <span>Tạo mới User</span>
+          </button>
+          &nbsp;
+          <a class="btn btn-info w-30" data-toggle="modal" (click)="editUser()">
+            <span>Chỉnh sửa Users</span></a
+          >
+        </div>
       </div>
+
       <table class="table table-striped table-hover">
         <thead>
           <tr>
@@ -85,7 +84,7 @@
                 <i class="material-icons md-14"> upgrade </i>
               </button>
               &nbsp;
-              <button (click)="editUser(user)" class="btn btn-sm btn-info">
+              <button (click)="editUser()" class="btn btn-sm btn-info">
                 <i class="material-icons md-14">build</i>
               </button>
               &nbsp;
@@ -239,41 +238,4 @@
     </div>
   </div>
 </div>
-
-<form action="" class="form-group form form-basic">
-  <h1 class="h3 mb-3 fw-normal">Tìm người dùng</h1>
-  <div class="form-floating">
-    <input
-      type="text"
-      id="mailInput"
-      class="form-control"
-      ngModel
-      name="mailInput"
-      #emailInput
-    />
-    <label for="floatingInput">Tìm bằng Email</label>
-    <button
-      class="w-100 btn btn-lg btn-primary"
-      (click)="searchUserByMail(emailInput)"
-    >
-      Tìm kiếm
-    </button>
-  </div>
-  <div class="form-floating">
-    <input
-      type="text"
-      id="phoneInput"
-      class="form-control"
-      ngModel
-      name="phoneInput"
-      #phoneInput
-    />
-    <label for="floatingInput">Tìm bằng Số điện thoại</label>
-    <button
-      class="w-100 btn btn-lg btn-primary"
-      (click)="searchUserByPhone(phoneInput)"
-    >
-      Tìm kiếm
-    </button>
-  </div>
-</form>
+<hr />

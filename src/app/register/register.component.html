@@ -8,7 +8,7 @@
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                <h1 class="h4 text-gray-900 mb-4">Tạo tài khoản!</h1>
               </div>
               <form class="user" [formGroup]="form">
                 <div class="form-group">
@@ -16,55 +16,92 @@
                     type="text"
                     class="form-control form-control-user"
                     id="exampleFirstName"
-                    placeholder="Full Name"
+                    placeholder="Tên"
                     formControlName="name"
                     required
                   />
+                  <div
+                    style="color: brown"
+                    *ngIf="name?.invalid && name?.touched"
+                  >
+                    <small *ngIf="name?.errors?.['required']">
+                      Không được bỏ trống.
+                    </small>
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="email"
                     class="form-control form-control-user"
                     id="exampleInputEmail"
-                    placeholder="Email Address"
+                    placeholder="Email"
                     formControlName="mail"
                     required
                   />
+                  <div
+                    style="color: brown"
+                    *ngIf="mail?.invalid && mail?.touched"
+                  >
+                    <small *ngIf="mail?.errors?.['required']">
+                      Không được bỏ trống.
+                    </small>
+                    <small *ngIf="mail?.errors?.['email']">
+                      Sai định dạng email.
+                    </small>
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="password"
                     class="form-control form-control-user"
                     id="examplePassword"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     formControlName="password"
                     required
                   />
+                  <div
+                    style="color: brown"
+                    *ngIf="password?.invalid && password?.touched"
+                  >
+                    <small *ngIf="password?.errors?.['required']">
+                      Không được bỏ trống.
+                    </small>
+                  </div>
                 </div>
                 <div class="form-group">
                   <input
                     type="phone"
                     class="form-control form-control-user"
                     id="examplePhone"
-                    placeholder="Phone Number"
+                    placeholder="Số điện thoại"
                     formControlName="phone"
                     required
                   />
+                  <div
+                    style="color: brown"
+                    *ngIf="phone?.invalid && phone?.touched"
+                  >
+                    <small *ngIf="phone?.errors?.['required']">
+                      Không được bỏ trống.
+                    </small>
+                  </div>
                 </div>
-                <a
-                  class="btn btn-primary btn-user btn-block"
+
+                <button
                   (click)="submit()"
+                  class="btn btn-primary btn-user btn-block"
+                  [disabled]="!form.valid"
                 >
-                  Register Account
-                </a>
+                  Đăng nhập
+                </button>
               </form>
               <hr />
               <div class="text-center">
-                <a class="small" routerLink="/forgot">Forgot Password?</a>
+                <a class="small" routerLink="/forgot">Quên mật khẩu?</a>
               </div>
               <div class="text-center">
                 <a class="small" routerLink="/login"
-                  >Already have an account? Login!</a
+                  >Bạn đã có tài khoản? Đăng nhập!</a
                 >
               </div>
             </div>

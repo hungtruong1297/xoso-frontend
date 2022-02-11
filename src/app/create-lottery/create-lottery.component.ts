@@ -23,6 +23,7 @@ export class CreateLotteryComponent implements OnInit {
   provinces: any;
   winnings: any;
   results: any;
+  message: any;
 
   // dateInput = "";
   // provinceInput = "Dak Lak";
@@ -37,15 +38,7 @@ export class CreateLotteryComponent implements OnInit {
   }
 
   submit(f: NgForm) {
-    console.log(f);
-    console.log(f.form.value);
-
-    // let date = f.value.date;
-    // let provinceId = f.value.id;
-
-    // this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
-    // this.http.get(this.updatedURL).subscribe(response => this.results = response);
-    this.http.post(this._urlResult, f.form.value).subscribe(response => console.log(response));
+    this.http.post(this._urlResult, f.form.value).subscribe(() => this.message = "Thêm mới thành công.");
   }
 
   getProvinces() {

@@ -1,82 +1,91 @@
-<div class="row">
-  <div class="col-xs-12 col-md-offset-3">
-    <h2>Create <b>User</b></h2>
-    <form
-      class="form-basic"
-      action=""
-      #authForm="ngForm"
-      (ngSubmit)="onSubmit(authForm)"
-    >
-      <div class="form-group">
-        <label for="mail">E-mail</label>
-        <input
-          type="email"
-          id="mail"
-          ngModel
-          name="mail"
-          class="form-control"
-          required
-          email
-        />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          required
-          ngModel
-          name="password"
-          minlength="6"
-        />
-      </div>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          class="form-control"
-          required
-          ngModel
-          name="name"
-        />
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input
-          type="text"
-          id="phone"
-          class="form-control"
-          required
-          ngModel
-          name="phone"
-        />
-      </div>
-      <div class="form-group">
-        <label for="roles">Role</label>
-        <select required ngModel name="roles" id="roles" class="form-control">
-          <option *ngFor="let role of roles" [ngValue]="role">
-            {{ role.roleName }}
-          </option>
-        </select>
-      </div>
-      <div class="alert alert-danger" *ngIf="isError">
-        <p>{{ errorMessage }}</p>
-      </div>
-      <div>.</div>
-      <div>
-        <button
-          class="btn btn-primary mr-1"
-          type="submit"
-          [disabled]="!authForm.valid"
-        >
-          Create User
-        </button>
-        <div>
-          {{ authForm.value | json }}
-        </div>
-      </div>
-    </form>
-  </div>
+<div class="text-center">
+  <h1 class="h4 text-gray-900 mb-4">Tạo mới User</h1>
 </div>
+
+<form action="" #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div class="form-group">
+    <label for="mail">Email</label>
+    <input
+      type="email"
+      id="mail"
+      ngModel
+      name="mail"
+      class="form-control form-control-user"
+      required
+      email
+      #mail="ngModel"
+    />
+    <div class="alert alert-danger" *ngIf="mail.touched && mail.invalid">
+      <div *ngIf="mail.errors?.['required']">Mail không được để trống</div>
+      <div *ngIf="mail.errors?.['email']">Sai định dạng mail</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Mật khẩu</label>
+    <input
+      type="password"
+      id="password"
+      class="form-control form-control-user"
+      required
+      ngModel
+      name="password"
+      minlength="6"
+      #password="ngModel"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="password.touched && password.invalid"
+    >
+      <div *ngIf="password.errors?.['required']">
+        Mật khẩu không được để trống
+      </div>
+      <div *ngIf="password.errors?.['minlength']">
+        Mật khẩu tối thiểu 6 ký tự
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name">Tên</label>
+    <input
+      type="text"
+      id="name"
+      class="form-control form-control-user"
+      ngModel
+      name="name"
+    />
+  </div>
+  <div class="form-group">
+    <label for="phone">Số điện thoại</label>
+    <input
+      type="text"
+      id="phone"
+      class="form-control form-control-user"
+      ngModel
+      name="phone"
+      pattern="(0)[0-9 ]{9}"
+      #phone="ngModel"
+    />
+    <div class="alert alert-danger" *ngIf="phone.touched && phone.invalid">
+      <div *ngIf="phone.errors?.['pattern']">
+        Định dạng số điện thoại sai. Ví dụ: 0912456456
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="roles">Vai trò</label>
+    <select required ngModel name="roles" id="roles" class="form-control">
+      <option *ngFor="let role of rolesList" [ngValue]="role">
+        {{ role.roleName }}
+      </option>
+    </select>
+  </div>
+  <div class="alert alert-danger" *ngIf="isError">
+    <p>{{ errorMessage }}</p>
+  </div>
+  <div class="text-center">
+    <button class="btn btn-primary mr-1" type="submit" [disabled]="!form.valid">
+      Tạo mới
+    </button>
+  </div>
+</form>

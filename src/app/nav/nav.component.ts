@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  authenticated: boolean = AuthService.isLoggedIn;
+  isAuthenticated!: boolean;
 
   constructor(
     private router: Router,
@@ -23,16 +23,37 @@ export class NavComponent implements OnInit {
     //     this.authenticated = auth;
     //   }
     // )
-    this.authenticated = !!this.authService.IsLoggedIn();
+    // this.isAuthenticated = !!this.authService.IsLoggedIn();
+    this.isAuthenticated = this.authService.IsLoggedIn();
+    if (this.isAuthenticated == false) {
+      this.router.navigate(['/login']);
+    }
+    if (this.isAuthenticated == true) {
+      this.router.navigate(['/home']);
+    }
   }
 
   logout() {
-    this.authenticated = false;
+    this.isAuthenticated = false;
     localStorage.removeItem('id_token');
     localStorage.removeItem('username');
     localStorage.removeItem('role_name');
     AuthService.isLoggedIn = false;
-    this.router.navigate(['']);
+    this.router.navigate(['/login']);
+  }
+
+  get isAdmin() {
+    if (localStorage.getItem('role_name') === 'ADMIN') {
+      return true;
+    }
+    return false;
+  }
+
+  get isUser() {
+    if (localStorage.getItem('role_name') === 'USER') {
+      return true;
+    }
+    return false;
   }
 
 }
