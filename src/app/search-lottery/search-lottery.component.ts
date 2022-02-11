@@ -41,7 +41,13 @@ export class SearchLotteryComponent implements OnInit {
     let provinceId = f.value.id;
 
     this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
-    this.http.get(this.updatedURL).subscribe(response => this.results = response);
+    this.http.get(this.updatedURL).subscribe(
+      {
+        next: (v) => this.results = v,
+        error: (e) => { alert('Đã xảy ra lỗi.'); console.log(e) },
+        complete: () => console.info('complete')
+      }
+    );
   }
 
   getProvinces() {

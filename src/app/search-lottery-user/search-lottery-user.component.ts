@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm, FormControl, FormArray } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class SearchLotteryUserComponent implements OnInit {
   selectedDate: any;
   selectedProvince = new Province(-1, "Empty");
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public datepipe: DatePipe) {
   }
 
   submit(f: FormGroup) {
@@ -47,11 +48,17 @@ export class SearchLotteryUserComponent implements OnInit {
   }
   getResults(f: FormGroup) {
     let date = f.value.date;
-    let provinceId = f.value.id;
+    let provinceId = f.value.provinceId;
 
-    this.updatedURL = this._urlResult + "/" + date + "/" + provinceId;
+    let dateStr = this.datepipe.transform(date, 'dd-MM-yyyy');
+    this.updatedURL = this._urlResult + "/" + dateStr + "/" + provinceId;
+    // console.log(this.updatedURL)
     this.http.get(this.updatedURL)
-      .subscribe(response => this.results = response);
+      .subscribe({
+        next: (response) => this.results = response,
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
   }
 
   ngOnInit(): void {
@@ -88,6 +95,14 @@ export class SearchLotteryUserComponent implements OnInit {
         "id": 4,
         "name": "Bình Dương"
       }]
+  }
+
+  get date() {
+    return this.searchLotteryForm.get('date');
+  }
+
+  get searchValue() {
+    return this.searchLotteryForm.get('searchValue');
   }
 
 

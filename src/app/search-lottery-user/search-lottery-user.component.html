@@ -1,95 +1,123 @@
-<form [formGroup]="searchLotteryForm" (ngSubmit)="submit(searchLotteryForm)">
-  <div>
-    <div class="form-group">
-      <label for="province">Tỉnh</label>
-      <select
-        id="province"
-        class="form-control"
-        formControlName="provinceId"
-        required
-      >
-        <option *ngFor="let province of provinces" [value]="province.id">
-          {{ province.name }}
-        </option>
-      </select>
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="card-body">
+          <div class="row">
+            <!-- Search Form -->
+            <div class="col-lg-6">
+              <h2>Dò <b>Vé số</b></h2>
+              <form
+                [formGroup]="searchLotteryForm"
+                (ngSubmit)="submit(searchLotteryForm)"
+              >
+                <div>
+                  <div class="form-group">
+                    <label for="province">Tỉnh</label>
+                    <select
+                      id="province"
+                      class="form-control"
+                      formControlName="provinceId"
+                      required
+                    >
+                      <option
+                        *ngFor="let province of provinces"
+                        [value]="province.id"
+                      >
+                        {{ province.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <div class="form-group">
+                    <label for="value">Giá trị</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="searchValue"
+                      required
+                      minlength="6"
+                      maxlength="6"
+                      pattern="^[0-9]*$"
+                    />
+                    <!-- Error Message -->
+                    <div
+                      class="alert alert-danger"
+                      *ngIf="searchValue?.touched && searchValue?.invalid"
+                    >
+                      <div *ngIf="searchValue?.errors?.required">
+                        Không được để trống
+                      </div>
+                      <div
+                        *ngIf="
+                          searchValue?.errors?.pattern ||
+                          searchValue?.errors?.minlength
+                        "
+                      >
+                        Sai Định dạng hoặc không đủ 6 số. Ví dụ: 123456
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="date">Ngày</label>
+                  <input
+                    id="date"
+                    matInput
+                    [matDatepicker]="picker"
+                    class="form-control"
+                    formControlName="date"
+                    placeholder="Chọn ngày..."
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </div>
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  [disabled]="searchLotteryForm.invalid"
+                >
+                  Dò vé
+                </button>
+                &nbsp;
+                <button
+                  class="btn btn-warning"
+                  (click)="searchLotteryForm.reset()"
+                >
+                  Nhập lại
+                </button>
+              </form>
+            </div>
+            <!-- Display Results -->
+            <div class="col-lg-6" *ngIf="results != null">
+              <h2>Kết quả <b>Vé số</b></h2>
+              <div *ngIf="results.length == 0">
+                <p>Không tìm thấy dữ liệu</p>
+              </div>
+              <div>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Giải</th>
+                      <th>Kết quả</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let result of results">
+                      <td>{{ result.winning.name }}</td>
+                      <td>{{ result.result }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div>
-    <div class="form-group">
-      <label for="value">Giá trị</label>
-      <input
-        type="text"
-        class="form-control"
-        required
-        formControlName="searchValue"
-      />
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="date">Ngày</label>
-    <input
-      id="date"
-      matInput
-      [matDatepicker]="picker"
-      class="form-control"
-      formControlName="date"
-    />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </div>
-  <!-- Normal 2 input fields -->
-  <!-- Kinda different syntax between ngModelGroup="province" and ngModel name="id" -->
-  <!-- <div ngModelGroup="province">
-      <div class="form-group">
-        <label for="provinceId">Tỉnh ID</label>
-        <input
-          id="provinceId"
-          type="text"
-          class="form-control"
-          required
-          ngModel
-          name="id"
-          value="1"
-        />
-      </div>
-      <div class="form-group">
-        <label for="provinceName">Tỉnh</label>
-        <input
-          id="provinceName"
-          type="text"
-          class="form-control"
-          required
-          ngModel
-          name="name"
-          value="Dak Lak"
-        />
-      </div>
-    </div> -->
-  <button
-    class="btn btn-primary"
-    type="submit"
-    [disabled]="searchLotteryForm.invalid"
-  >
-    Dò vé
-  </button>
-  <button class="btn btn-warning" (click)="searchLotteryForm.reset()">
-    Xoá form
-  </button>
-</form>
-{{ searchLotteryForm.value | json }}
-<div>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Giải</th>
-        <th>Kết quả</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let result of results">
-        <td>{{ result.winning.name }}</td>
-        <td>{{ result.result }}</td>
-      </tr>
-    </tbody>
-  </table>
 </div>

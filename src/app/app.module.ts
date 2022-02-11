@@ -28,9 +28,11 @@ import { SearchLotteryUserComponent } from './search-lottery-user/search-lottery
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTreeModule } from '@angular/material/tree';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SubmitFileComponent } from './submit-file/submit-file.component';
+import { DatePipe } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -68,13 +70,17 @@ import { SubmitFileComponent } from './submit-file/submit-file.component';
     MatNativeDateModule,
     MatDatepickerModule
   ],
-  providers: [HttpClientModule,
+  providers: [
+    HttpClientModule,
+    DatePipe,
     {
       // Source: https://www.youtube.com/watch?v=UrfhqE7I-3o&ab_channel=Codevolution
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }],
+    },
+    { provide: MAT_DATE_LOCALE, useValue: 'vi-VN' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
